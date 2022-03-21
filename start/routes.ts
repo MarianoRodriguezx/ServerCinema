@@ -38,12 +38,14 @@ Route.group(()=>{
   Route.get('vertipos', 'TipoUsuariosController.Index')
 }).prefix('api').middleware('auth')
 
-//----------------------------------------------------------------------------------------------------------------
-
+//----------------------------------------------------------------------------------------------------------------//
+//------------------------------------- Rutas Sobre Usuarios -----------------------------------------------------//
 //USERS
 Route.group(() => {
   Route.get('index', 'UsersController.index');
   Route.patch('updateUser/:id', 'UsersController.updateUser')
   Route.delete('deleteUser/:id', 'UsersController.deleteUser')
 }).prefix('users').middleware('auth');
+
+//----------------------------------------------------------------------------------------------------------------//
 
