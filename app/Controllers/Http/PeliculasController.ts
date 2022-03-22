@@ -19,8 +19,9 @@ export default class PeliculasController {
       })
     }
     catch(error){
-      response.status(400).json({
-        message: 'ocurrio un error'
+      response.status(500).json({
+        message: 'ocurrio un error',
+        data: []
       })
     }
   }
