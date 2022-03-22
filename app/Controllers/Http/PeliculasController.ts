@@ -32,7 +32,7 @@ export default class PeliculasController {
           rules.required(),
           rules.minLength(3),
           rules.maxLength(50),
-          rules.unique({table: 'Peliculas', column: 'nombre'})
+          rules.unique({table: 'peliculas', column: 'nombre'})
         ]),
         categoria: schema.number([rules.required()]),
         duracion: schema.number([rules.required()]),
