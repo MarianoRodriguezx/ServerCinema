@@ -18,7 +18,6 @@ export default class ActoresController {
       })
     }
   }
-
   public async store({request, response}: HttpContextContract) {
     try{
       const actorSchema = schema.create({

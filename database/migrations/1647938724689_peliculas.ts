@@ -6,7 +6,7 @@ export default class Peliculas extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
-      table.string('nombre').notNullable().unique()
+      table.string('nombre', 50).notNullable().unique()
       table.integer('categoria').notNullable().unsigned().references('id').inTable('categorias')
       table.integer('duracion').notNullable()
       table.text('descripcion').notNullable()

@@ -1,5 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import Categoria from './Categoria'
+import Directore from './Directore'
+import Productora from './Productora'
+import Funcione from './Funcione'
 
 export default class Pelicula extends BaseModel {
   @column({ isPrimary: true })
@@ -31,4 +35,26 @@ export default class Pelicula extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @belongsTo(()=> Categoria, {
+    foreignKey: 'categoria'
+  })
+  public Categoria: BelongsTo<typeof Categoria>
+
+  @belongsTo(()=> Directore, {
+    foreignKey: 'director'
+  })
+  public Directore: BelongsTo<typeof Directore>
+
+  @belongsTo(()=> Productora, {
+    foreignKey: 'productora'
+  })
+  public Productura: BelongsTo<typeof Productora>
+   
+  @hasMany(()=>Funcione, {
+    foreignKey: 'pelicula',
+    localKey: 'id'
+  })
+  public Pelicula: HasMany<typeof Funcione>
+  
 }
