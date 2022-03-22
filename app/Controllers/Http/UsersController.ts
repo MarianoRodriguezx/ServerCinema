@@ -12,10 +12,17 @@ export default class UsersController {
         try{
             const token = await auth.use('api').attempt(email, password)
 
+            const id = await User.query().select('id').where('email',email)
+            //const id = await 
+
             //const id = await User.query().select('id')
             
             //return token.id;
-            return token; 
+            const data = {
+                token,
+                id
+            }
+            return data 
             
         }catch{
             return response.badRequest('Error al iniciar')
