@@ -1,15 +1,15 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
-import Actore from 'App/Models/Actore'
+import Cine from 'App/Models/Cine'
 
-export default class ActoresController {
+export default class CinesController {
   public async index({response}: HttpContextContract) {
     try{
-      const actor = await Actore.query().select('id','nombre', 'alias')
+      const cine = await Cine.query().select('id','nombre', 'direccion')
 
       response.status(200).json({
         message: 'Consulta realizada correctamente',
-        data: actor
+        data: cine
       })
     }
     catch(error){
@@ -21,28 +21,28 @@ export default class ActoresController {
 
   public async store({request, response}: HttpContextContract) {
     try{
-      const actorSchema = schema.create({
+      const cineSchema = schema.create({
         nombre: schema.string({trim: true}, [
           rules.required(),
-          rules.minLength(10),
+          rules.minLength(5),
           rules.maxLength(50),
-          rules.unique({table: 'actores', column: 'nombre'})
+          rules.unique({table: 'cines', column: 'nombre'})
         ]),
 
-        alias: schema.string({trim: true}, [
+        direccion: schema.string({trim: true}, [
           rules.required(),
           rules.minLength(3),
-          rules.maxLength(20),
-          rules.unique({table: 'actores', column: 'alias'})
+          rules.maxLength(60),
+          rules.unique({table: 'cines', column: 'direccion'})
         ])
       })
 
-      const actor = await request.validate({schema: actorSchema})
-      Actore.create(actor)
+      const cine = await request.validate({schema: cineSchema})
+      Cine.create(cine)
 
       response.status(200).json({
         message: 'Se inserto correctamente',
-        data: actor
+        data: cine
       })
     }
     catch(error){
@@ -55,11 +55,11 @@ export default class ActoresController {
   public async show({params, response}: HttpContextContract) {
 
     try{
-      const actor = await Actore.findOrFail(params.id)
+      const cine = await Cine.findOrFail(params.id)
 
       response.status(200).json({
         message: 'La consulta se hizo correctamente',
-        data: actor
+        data: cine
       })
     }
     catch(error){
@@ -72,16 +72,16 @@ export default class ActoresController {
   public async update({params, response, request}: HttpContextContract) {
 
     try{
-      const actor = await Actore.findOrFail(params.id)
+      const cine = await Cine.findOrFail(params.id)
 
-      actor.nombre=request.input('nombre')
-      actor.alias=request.input('alias')
+      cine.nombre=request.input('nombre')
+      cine.direccion=request.input('direccion')
 
-      actor.save()
+      cine.save()
 
       response.status(200).json({
         message: 'La actualizacion se hizo correctamente',
-        data: actor
+        data: cine
       })
     }
     catch(error){
@@ -93,9 +93,9 @@ export default class ActoresController {
 
   public async destroy({params, response}: HttpContextContract) {
     try{
-      const actor = await Actore.findOrFail(params.id)
+      const cine = await Cine.findOrFail(params.id)
 
-      actor.delete()
+      cine.delete()
 
       response.status(200).json({
         message: 'La eliminacion se hizo correctamente',

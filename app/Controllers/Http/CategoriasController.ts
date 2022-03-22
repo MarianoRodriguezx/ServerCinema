@@ -1,15 +1,15 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
-import Actore from 'App/Models/Actore'
+import Categoria from 'App/Models/Categoria'
 
-export default class ActoresController {
+export default class CategoriasController {
   public async index({response}: HttpContextContract) {
     try{
-      const actor = await Actore.query().select('id','nombre', 'alias')
+      const categoria = await Categoria.query().select('id','nombre')
 
       response.status(200).json({
         message: 'Consulta realizada correctamente',
-        data: actor
+        data: categoria
       })
     }
     catch(error){
@@ -21,28 +21,21 @@ export default class ActoresController {
 
   public async store({request, response}: HttpContextContract) {
     try{
-      const actorSchema = schema.create({
+      const categoriaSchema = schema.create({
         nombre: schema.string({trim: true}, [
           rules.required(),
-          rules.minLength(10),
+          rules.minLength(5),
           rules.maxLength(50),
-          rules.unique({table: 'actores', column: 'nombre'})
-        ]),
-
-        alias: schema.string({trim: true}, [
-          rules.required(),
-          rules.minLength(3),
-          rules.maxLength(20),
-          rules.unique({table: 'actores', column: 'alias'})
+          rules.unique({table: 'categorias', column: 'nombre'})
         ])
       })
 
-      const actor = await request.validate({schema: actorSchema})
-      Actore.create(actor)
+      const categoria = await request.validate({schema: categoriaSchema})
+      Categoria.create(categoria)
 
       response.status(200).json({
         message: 'Se inserto correctamente',
-        data: actor
+        data: categoria
       })
     }
     catch(error){
@@ -55,11 +48,11 @@ export default class ActoresController {
   public async show({params, response}: HttpContextContract) {
 
     try{
-      const actor = await Actore.findOrFail(params.id)
+      const categoria = await Categoria.findOrFail(params.id)
 
       response.status(200).json({
         message: 'La consulta se hizo correctamente',
-        data: actor
+        data: categoria
       })
     }
     catch(error){
@@ -72,16 +65,15 @@ export default class ActoresController {
   public async update({params, response, request}: HttpContextContract) {
 
     try{
-      const actor = await Actore.findOrFail(params.id)
+      const categoria = await Categoria.findOrFail(params.id)
 
-      actor.nombre=request.input('nombre')
-      actor.alias=request.input('alias')
+      categoria.nombre=request.input('nombre')
 
-      actor.save()
+      categoria.save()
 
       response.status(200).json({
         message: 'La actualizacion se hizo correctamente',
-        data: actor
+        data: categoria
       })
     }
     catch(error){
@@ -93,9 +85,9 @@ export default class ActoresController {
 
   public async destroy({params, response}: HttpContextContract) {
     try{
-      const actor = await Actore.findOrFail(params.id)
+      const categoria = await Categoria.findOrFail(params.id)
 
-      actor.delete()
+      categoria.delete()
 
       response.status(200).json({
         message: 'La eliminacion se hizo correctamente',

@@ -1,15 +1,15 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
-import Actore from 'App/Models/Actore'
+import Directore from 'App/Models/Directore'
 
-export default class ActoresController {
+export default class DirectoresController {
   public async index({response}: HttpContextContract) {
     try{
-      const actor = await Actore.query().select('id','nombre', 'alias')
+      const director = await Directore.query().select('id','nombre')
 
       response.status(200).json({
         message: 'Consulta realizada correctamente',
-        data: actor
+        data: director
       })
     }
     catch(error){
@@ -21,28 +21,21 @@ export default class ActoresController {
 
   public async store({request, response}: HttpContextContract) {
     try{
-      const actorSchema = schema.create({
+      const directorSchema = schema.create({
         nombre: schema.string({trim: true}, [
           rules.required(),
-          rules.minLength(10),
+          rules.minLength(8),
           rules.maxLength(50),
-          rules.unique({table: 'actores', column: 'nombre'})
-        ]),
-
-        alias: schema.string({trim: true}, [
-          rules.required(),
-          rules.minLength(3),
-          rules.maxLength(20),
-          rules.unique({table: 'actores', column: 'alias'})
+          rules.unique({table: 'directores', column: 'nombre'})
         ])
       })
 
-      const actor = await request.validate({schema: actorSchema})
-      Actore.create(actor)
+      const director = await request.validate({schema: directorSchema})
+      Directore.create(director)
 
       response.status(200).json({
         message: 'Se inserto correctamente',
-        data: actor
+        data: director
       })
     }
     catch(error){
@@ -55,11 +48,11 @@ export default class ActoresController {
   public async show({params, response}: HttpContextContract) {
 
     try{
-      const actor = await Actore.findOrFail(params.id)
+      const director = await Directore.findOrFail(params.id)
 
       response.status(200).json({
         message: 'La consulta se hizo correctamente',
-        data: actor
+        data: director
       })
     }
     catch(error){
@@ -72,16 +65,15 @@ export default class ActoresController {
   public async update({params, response, request}: HttpContextContract) {
 
     try{
-      const actor = await Actore.findOrFail(params.id)
+      const director = await Directore.findOrFail(params.id)
 
-      actor.nombre=request.input('nombre')
-      actor.alias=request.input('alias')
+      director.nombre=request.input('nombre')
 
-      actor.save()
+      director.save()
 
       response.status(200).json({
         message: 'La actualizacion se hizo correctamente',
-        data: actor
+        data: director
       })
     }
     catch(error){
@@ -93,9 +85,9 @@ export default class ActoresController {
 
   public async destroy({params, response}: HttpContextContract) {
     try{
-      const actor = await Actore.findOrFail(params.id)
+      const director = await Directore.findOrFail(params.id)
 
-      actor.delete()
+      director.delete()
 
       response.status(200).json({
         message: 'La eliminacion se hizo correctamente',
