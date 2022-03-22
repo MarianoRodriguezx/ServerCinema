@@ -20,8 +20,8 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
+Route.get('/', async ({view}) => {
+  return view.render('welcome')
 })
 
 Route.post('login', 'UsersController.login');
@@ -48,4 +48,10 @@ Route.group(() => {
 }).prefix('users').middleware('auth');
 
 //----------------------------------------------------------------------------------------------------------------//
+
+Route.group(()=>{
+
+  Route.resource('actores', 'ActoresController').apiOnly()
+
+}).prefix('api/v1').middleware(['auth'])
 
