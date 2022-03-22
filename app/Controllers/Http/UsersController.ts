@@ -18,11 +18,12 @@ export default class UsersController {
             //const id = await User.query().select('id')
             
             //return token.id;
-            const data = {
-                token,
-                id
-            }
-            return data 
+            response.status(200).json({
+                message: "Logueo Exitoso",
+                data: token,
+                id: id[0]
+            })
+            //return data 
             
         }catch{
             return response.badRequest('Error al iniciar')
