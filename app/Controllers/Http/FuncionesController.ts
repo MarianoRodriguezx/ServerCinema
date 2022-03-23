@@ -23,6 +23,28 @@ export default class FuncionesController {
     }
   }
 
+  public async InfoxCine({response, params}: HttpContextContract){
+    try{
+      //const info = await Database.RawQuery('SELECT peliculas.nombre, peliculas.imagenes, peliculas.id, peliculas.descripcion, peliculas.duracion, funciones.sala, funciones.fecha FROM `peliculas` INNER join funciones on peliculas.id=funciones.pelicula INNER join salas on salas.id=funciones.sala INNER join cines on cines.id=salas.cine where cines.id=', params.id)
+
+      //const info = await Pelicula.query().innerJoin('funciones', function() 'funciones.id', 'peliculas.id').innerJoin('salas', 'funciones.sala', 'salas.id').innerJoin('cines', 'salas.cine', 'cines.id').where('cines.id', params.id)
+      //const info = await Pelicula.query().select('peliculas.nombre', 'peliculas.imagenes', 'peliculas.id', 'peliculas.descripcion', 'peliculas.duracion', 'salas.numero', 'funciones.fecha').innerJoin('funciones', 'funciones.pelicula', 'peliculas.id').innerJoin('salas', 'funciones.sala', 'salas.id').innerJoin('cines', 'salas.cine', 'cines.id').where('cines.id', params.id)
+      const db = await Database.rawQuery("SELECT funciones.id as 'funcion_id',peliculas.nombre as 'nombre_pelicula', peliculas.imagenes as 'imagenes', peliculas.descripcion as 'descripcion', peliculas.duracion as 'duracion', salas.numero as 'numero_sala', cines.nombre as 'nombre_cine', funciones.fecha as 'fecha' from peliculas INNER JOIN funciones on funciones.pelicula=peliculas.id INNER JOIN salas on salas.id=funciones.sala INNER join cines on cines.id=salas.cine where cines.id=?", [params.id])
+      //const funcion = await Funcione.query().preload('Pelicula').preload('Sala')
+
+      const db2 = db[0]
+      response.status(200).json({
+        message: 'consulta exitosa',
+        data: db2
+      })
+    }
+    catch(error){
+      response.status(400).json({
+        message: error
+      })
+    }
+  }
+
   public async store({response, request}: HttpContextContract) {
     try{
       const funcionSchema = schema.create({
