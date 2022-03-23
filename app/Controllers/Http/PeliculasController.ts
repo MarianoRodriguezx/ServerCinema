@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
+import Database from '@ioc:Adonis/Lucid/Database'
 import Pelicula from 'App/Models/Pelicula'
 
 export default class PeliculasController {
@@ -77,6 +78,23 @@ export default class PeliculasController {
       message: 'ocurrio un error'
     })
   }
+  }
+
+  public async InfoxCine({response, params}: HttpContextContract){
+    try{
+      //const info = await Database.rawQuery('SELECT peliculas.nombre, peliculas.imagenes, peliculas.id, peliculas.descripcion, peliculas.duracion, funciones.sala, funciones.fecha FROM `peliculas` INNER join funciones on peliculas.id=funciones.pelicula INNER join salas on salas.id=funciones.sala INNER join cines on cines.id=salas.cine where cines.id=', params.id)
+
+      const info = await Pelicula.query().select('peliculas.nombre', 'peliculas.imagenes', 'peliculas.id', 'peliculas.descripcion', 'peliculas.duracion', 'salas.numero', 'funciones.fecha').innerJoin('funciones', 'funciones.id', 'peliculas.id').innerJoin('salas', 'funciones.sala', 'salas.id').innerJoin('cines', 'salas.cine', 'cines.id').where('cines.id', params.id)
+      response.status(200).json({
+        message: 'consulta exitosa',
+        data: info
+      })
+    }
+    catch(error){
+      response.status(400).json({
+        message: error
+      })
+    }
   }
 
   public async update({params, request, response}: HttpContextContract) {

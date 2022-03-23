@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Sala from './Sala'
+import Funcione from './Funcione'
 
 export default class Cine extends BaseModel {
   @column({ isPrimary: true })
@@ -23,4 +24,7 @@ export default class Cine extends BaseModel {
     localKey: 'id'
   })
   public Cine: HasMany<typeof Sala>
+
+  @hasMany(()=> Funcione, {})
+  public Funcion: HasMany<typeof Funcione>
 }

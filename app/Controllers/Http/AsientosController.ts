@@ -20,6 +20,24 @@ export default class AsientosController {
     }
   }
 
+  public async FiltroAsientos({params, response}){
+    try{
+      const asiento = await Asiento.query().preload('Funcione', (queryfunc) => {
+        queryfunc.select('sala', 'pelicula')
+      }).where('funcion', params.id)
+
+      response.status(200).json({
+        message: 'consulta satisfactoria',
+        data: asiento
+      })
+    }
+    catch(error){
+      response.status(200).json({
+        message: 'ocurrio un error'
+      })
+    }
+  }
+
   //public async create({}: HttpContextContract) {}
 
   //public async store({}: HttpContextContract) {}

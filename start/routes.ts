@@ -58,6 +58,15 @@ Route.group(()=>{
   Route.resource('productoras', 'ProductorasController').apiOnly()
   Route.resource('salas', 'SalasController').apiOnly()
   Route.resource('peliculas', 'PeliculasController').apiOnly()
+
+  //----------------------------------------------------------------//
+
+  Route.get('infoxcine/:id', 'PeliculasController.InfoxCine')
+  Route.get('filtro_asientos/:id', 'AsientosController.FiltroAsientos')
+
+
+  //---------------------------------------------------------------//
+
   Route.resource('funciones', 'FuncionesController').apiOnly()
   Route.resource('asientos', 'AsientosController').apiOnly()
   Route.resource('asiento_cliente', 'AsientoClientesController').apiOnly()

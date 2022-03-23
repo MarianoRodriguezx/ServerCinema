@@ -1,17 +1,19 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
+import Database from '@ioc:Adonis/Lucid/Database'
 import Asiento from 'App/Models/Asiento'
 import Funcione from 'App/Models/Funcione'
-import AsientoSeeder from 'Database/seeders/Asiento'
 
 export default class FuncionesController {
   public async index({response}: HttpContextContract) {
     try{
-      const funcion = await Funcione.query().preload('Pelicula').preload('Sala')
+      const db = await Database.rawQuery("SELECT funciones.id as 'funcion_id',peliculas.nombre as 'nombre_pelicula', salas.numero as 'numero_sala', cines.nombre as 'nombre_cine', funciones.fecha as 'fecha' from peliculas INNER JOIN funciones on funciones.pelicula=peliculas.id INNER JOIN salas on salas.id=funciones.sala INNER join cines on cines.id=salas.cine")
+      //const funcion = await Funcione.query().preload('Pelicula').preload('Sala')
 
+      const db2 = db[0]
       response.status(200).json({
         message: "Consulta hecha exitosamente",
-        data: funcion
+        data: db2
       })
     }
     catch(error){
@@ -114,11 +116,13 @@ export default class FuncionesController {
 
   public async show({params, response}: HttpContextContract) {
     try{
-      const funcion = await Funcione.query().preload('Pelicula').preload('Sala').where('id', params.id)
+      const db = await Database.rawQuery("SELECT funciones.id as 'funcion_id',peliculas.nombre as 'nombre_pelicula', salas.numero as 'numero_sala', cines.nombre as 'nombre_cine', funciones.fecha as 'fecha' from peliculas INNER JOIN funciones on funciones.pelicula=peliculas.id INNER JOIN salas on salas.id=funciones.sala INNER join cines on cines.id=salas.cine where funciones.id="[params.id])
+      //const funcion = await Funcione.query().preload('Pelicula').preload('Sala')
 
+      const db2 = db[0]
       response.status(200).json({
         message: "Consulta hecha exitosamente",
-        data: funcion
+        data: db2
       })
     }
     catch(error){
