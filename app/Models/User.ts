@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
 import { column, beforeSave, BaseModel, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import TUsuario from './TUsuario'
+import AsientoCliente from './AsientoCliente'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -40,4 +41,10 @@ export default class User extends BaseModel {
     localKey: 'id'
   })
   public TUsuario: HasMany<typeof TUsuario>
+
+  @hasMany(()=> AsientoCliente, {
+    foreignKey: 'cliente',
+    localKey: 'id'
+  } )
+  public User: HasMany<typeof AsientoCliente>
 }

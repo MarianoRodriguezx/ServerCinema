@@ -5,7 +5,10 @@ export default class AsientoClientes extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
+      table.increments('id').primary()
+      table.integer('asiento').notNullable().unsigned().references('id').inTable('asientos')
+      table.integer('cliente').notNullable().unsigned().references('id').inTable('users')
+      table.float('precio').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

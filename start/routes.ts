@@ -60,6 +60,7 @@ Route.group(()=>{
   Route.resource('peliculas', 'PeliculasController').apiOnly()
   Route.resource('funciones', 'FuncionesController').apiOnly()
   Route.resource('asientos', 'AsientosController').apiOnly()
+  Route.resource('asiento_cliente', 'AsientoClientesController').apiOnly()
 
 }).prefix('api/v1').middleware(['auth'])
 
