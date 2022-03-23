@@ -107,7 +107,8 @@ export default class FuncionesController {
     }
     catch(error){
       response.status(500).json({
-        message: "Ocurrio un error"
+        message: error
+
       })
     }
   }
