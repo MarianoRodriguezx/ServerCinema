@@ -59,12 +59,8 @@ export default class UsersController {
                 {trim: true},
                 [rules.required(), rules.unique({table: 'users', column: 'username'})]
             ),
-            age: schema.number(
-                [rules.required()]
-            ),
-            curp: schema.string(
-                {trim: true},
-                [rules.required(), rules.unique({table: 'users', column: 'curp'})]
+            birthday: schema.string(
+                {trim: true},[rules.required()]
             )
         })
 
