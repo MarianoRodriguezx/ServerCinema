@@ -14,10 +14,7 @@ export default class User extends BaseModel {
   public username: string
 
   @column()
-  public age: Number
-
-  @column()
-  public curp: string
+  public birthday: string
 
   @column({ serializeAs: null })
   public password: string

@@ -575,4 +575,206 @@
         </tbody>
     </table>
 
+    <hr>
+
+    <br><h4 class="text-center">Direcciones Funciones</h4>
+    <table class="table table-dark table-striped text-center">
+        <thead>
+            <tr>
+                <th>Accion</th>
+                <th>Metodo</th>
+                <th>Direccion</th>
+                <th>Seguridad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ver todas las funciones</td>
+                <td>GET</td>
+                <td>http://direccion/api/v1/funciones</td>
+                <td>SI</td>
+            </tr>
+            <tr>
+                <td>Ver funcion Especifico</td>
+                <td>GET</td>
+                <td>http://direccion/api/v1/funciones/id</td>
+                <td>SI</td>
+            </tr>
+            <tr>
+                <td>Insertar funcion</td>
+                <td>POST</td>
+                <td>http://direccion/api/v1/funciones</td>
+                <td>SI</td>
+            </tr>
+            <tr>
+                <td>Modificar funcion</td>
+                <td>PUT</td>
+                <td>http://direccion/api/v1/funciones/id</td>
+                <td>SI</td>
+            </tr>
+            <tr>
+                <td>Eliminar funcion</td>
+                <td>DELETE</td>
+                <td>http://direccion/api/v1/funciones/id</td>
+                <td>SI</td>
+            </tr>
+        </tbody>
+    </table><br>
+
+    <table class="table table-info table-striped text-center">
+        <thead>
+            <tr class="text-center">
+                <th>-</th>
+                <th>datos</th>
+                <th>tipo dato</th>
+                <th>Rules</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">
+                    <h5>Datos de Request</h5>
+                </td>
+                <td>
+                    <ul>
+                        <li>sala</li>
+                        <li>pelicula</li>
+                        <li>fecha</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>number - Llave Foranea de Tabla Salas</li>
+                        <li>number - Llave Foranea de Tabla Peliculas</li>
+                        <li>string / datetime</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>-</li>
+                        <li>-</li>
+                        <li>-</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <br><h4 class="text-center">Direcciones Asientos</h4>
+    <table class="table table-dark table-striped text-center">
+        <thead>
+            <tr>
+                <th>Accion</th>
+                <th>Metodo</th>
+                <th>Direccion</th>
+                <th>Seguridad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ver todas los asientos</td>
+                <td>GET</td>
+                <td>http://direccion/api/v1/asientos</td>
+                <td>SI</td>
+            </tr>
+        </tbody>
+    </table><br>
+
+    <table class="table table-info table-striped text-center">
+        <thead>
+            <tr class="text-center">
+                <th>-</th>
+                <th>datos</th>
+                <th>tipo dato</th>
+                <th>Rules</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">
+                    <h5>Datos de Request</h5>
+                </td>
+                <td>
+                    <ul>
+                        <li>funcion</li>
+                        <li>asiento</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>number - Llave Foranea de Tabla Funciones</li>
+                        <li>string</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>-</li>
+                        <li>-</li>
+                        <li>-</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <br><h4 class="text-center">Direcciones Usuarios</h4>
+    <table class="table table-dark table-striped text-center">
+        <thead>
+            <tr>
+                <th>Accion</th>
+                <th>Metodo</th>
+                <th>Direccion</th>
+                <th>Seguridad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ver todas las funciones</td>
+                <td>POST</td>
+                <td>http://direccion/login</td>
+                <td>SI</td>
+            </tr>
+            <tr>
+                <td>Cerrar Sesion</td>
+                <td>POST</td>
+                <td>http://direccion/logout</td>
+                <td>SI</td>
+            </tr>
+            <tr>
+                <td>Insertar Usuario</td>
+                <td>POST</td>
+                <td>http://direccion/singup</td>
+                <td>SI</td>
+            </tr>
+            <tr>
+                <td>verificar Token</td>
+                <td>PUT</td>
+                <td>http://direccion/verificarToken</td>
+                <td>SI</td>
+            </tr>
+            <tr>
+                <td>Todos los Usuarios</td>
+                <td>GET</td>
+                <td>http://direccion/index</td>
+                <td>SI</td>
+            </tr>
+            <tr>
+                <td>Actualizar Usuario</td>
+                <td>PATCH</td>
+                <td>http://direccion/updateUser/:id</td>
+                <td>SI</td>
+            </tr>
+            <tr>
+                <td>Eliminar Usuario</td>
+                <td>DELETE</td>
+                <td>http://direccion/deleteUser/:id</td>
+                <td>SI</td>
+            </tr>
+        </tbody>
+    </table><br>
+
 </div>

@@ -30,9 +30,18 @@ export default class UsersController {
         }
     }
 
-    public async logout({auth}){
-        await auth.use('api').revoke()
-        return true;
+    public async logout({auth, response}){
+        try
+        {
+            await auth.use('api').revoke()
+            return true;
+        }
+        catch(error){
+            response.status(500).json({
+                message: "ocurrio un error"
+            })
+        }
+        
     }
     
     public async signup({request, response}){
@@ -77,10 +86,9 @@ export default class UsersController {
     }
 
     public async updateUser({response,request, params}){
-        const {curp, age, username} = request.all();
+        const {birthday, username} = request.all();
         const user = await User.findOrFail(params.id)
-        user.curp = curp;
-        user.age = age;
+        user.birthday = birthday;
         user.username = username;
         await user.save()
         return response.ok(user);
