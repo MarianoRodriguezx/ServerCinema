@@ -128,6 +128,25 @@ export default class PeliculasController {
     }
   }
 
+  public async updateimage({params, request, response}: HttpContextContract){
+    try{
+      const img = await Pelicula.findOrFail(params.id)
+
+      img.imagenes=request.input('imagenes')
+
+      img.save()
+
+      response.status(200).json({
+        message: 'modificacion exitosa'
+      })
+    }
+    catch(error){
+      response.status(400).json({
+        message: 'ocurrio un error'
+      })
+    }
+  }
+
   public async destroy({params, response}: HttpContextContract) {
     try{
       const pelicula = await Pelicula.findOrFail(params.id)

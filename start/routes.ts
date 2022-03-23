@@ -63,6 +63,7 @@ Route.group(()=>{
 
   Route.get('infoxcine/:id', 'PeliculasController.InfoxCine')
   Route.get('filtro_asientos/:id', 'AsientosController.FiltroAsientos')
+  Route.put('modificar_imagen/:id', 'PeliculasController.updateimage')
 
 
   //---------------------------------------------------------------//
