@@ -14,7 +14,7 @@ export default class AsientoCliente extends BaseModel {
   public cliente: number
 
   @column()
-  public precio: number
+  public total: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
