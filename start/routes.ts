@@ -75,6 +75,8 @@ Route.group(()=>{
   Route.get('AsientosxFuncion/:id', 'AsientosController.AsientosxFuncion')
   Route.post('CambiarDisponibilidad', 'AsientosController.CambiarDisponibilidad')
 
+  Route.post('InsertarTicket', 'AsientoClientesController.InsertarTicket');
+
 }).prefix('api/v1').middleware(['auth'])
 
 Route.get('prueba', 'FuncionesController.Prueba')
