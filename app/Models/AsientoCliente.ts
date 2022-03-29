@@ -8,10 +8,10 @@ export default class AsientoCliente extends BaseModel {
   public id: number
 
   @column()
-  public asiento: number
+  public asientos: number
 
   @column()
-  public cliente: number
+  public usuario: number
 
   @column()
   public total: number
@@ -24,11 +24,6 @@ export default class AsientoCliente extends BaseModel {
 
   @column()
   public funcion: number
-
-  @belongsTo(()=>Asiento, {
-    foreignKey: 'asiento'
-  })
-  public Asiento: BelongsTo<typeof Asiento>
 
   @belongsTo(()=>User, {
     foreignKey: 'cliente'

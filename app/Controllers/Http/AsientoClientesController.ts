@@ -3,7 +3,7 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import AsientoCliente from 'App/Models/AsientoCliente'
 
 export default class AsientoClientesController {
-  public async index({response}: HttpContextContract) {
+  /*public async index({response}: HttpContextContract) {
     try{
       const asiento_cliente = await AsientoCliente.query().preload('Asiento').preload('User', (querr) => {
         querr.select('username')
@@ -19,7 +19,7 @@ export default class AsientoClientesController {
         message: "ocurrio un error"
       })
     }
-  }
+  }*/
 
   public async InsertarTicket({response,request}: HttpContextContract){
     //try{
@@ -40,7 +40,7 @@ export default class AsientoClientesController {
     //}
   }
 
-  public async store({response, request}: HttpContextContract) {
+  /*public async store({response, request}: HttpContextContract) {
     try{
       const asiento_clienteSchema = schema.create({
         asiento: schema.number([rules.required()]),
@@ -116,5 +116,5 @@ export default class AsientoClientesController {
         message: "ocurrio un error"
       })
     }
-  }
+  }*/
 }
