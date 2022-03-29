@@ -23,8 +23,11 @@ export default class AsientoClientesController {
 
   public async InsertarTicket({response,request}: HttpContextContract){
     try{
-      const ticket = await AsientoCliente.create(request.all())
+      const ticket = request.all()
+      
+      await AsientoCliente.create(request.all())
  
+      console.log(ticket)
       response.status(200).json({
         message: 'Ticket generado',
         data: ticket
