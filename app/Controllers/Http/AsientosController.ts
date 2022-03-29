@@ -55,7 +55,7 @@ export default class AsientosController {
 
       const asiento = request.input('id')
 
-      console.log(asiento)
+      //console.log(asiento)
 
       const ocupado = await Asientos.updateMany({_id: asiento}, {estado: true})
 
