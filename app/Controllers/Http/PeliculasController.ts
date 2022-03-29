@@ -82,7 +82,7 @@ export default class PeliculasController {
 
   public async InfoxCine({response, params}: HttpContextContract){
     try{
-      const info = await Database.rawQuery('SELECT peliculas.nombre, peliculas.imagenes, funciones.id, peliculas.descripcion, peliculas.duracion, funciones.sala, funciones.fecha FROM `peliculas` INNER join funciones on peliculas.id=funciones.pelicula INNER join salas on salas.id=funciones.sala INNER join cines on cines.id=salas.cine where cines.id=?', [params.id])
+      const info = await Database.rawQuery('SELECT peliculas.nombre, peliculas.imagenes, funciones.id as funcion_id, peliculas.id, peliculas.descripcion, peliculas.duracion, funciones.sala, funciones.fecha FROM `peliculas` INNER join funciones on peliculas.id=funciones.pelicula INNER join salas on salas.id=funciones.sala INNER join cines on cines.id=salas.cine where cines.id=?', [params.id])
 
       //peliculas.id
       //const info = await Pelicula.query().innerJoin('funciones', function() 'funciones.id', 'peliculas.id').innerJoin('salas', 'funciones.sala', 'salas.id').innerJoin('cines', 'salas.cine', 'cines.id').where('cines.id', params.id)
