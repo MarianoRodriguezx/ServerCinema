@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Asientos from 'App/Models/Mongoose/Asientos'
 import Asiento from 'App/Models/Asiento'
 
 export default class AsientosController {
@@ -35,6 +36,33 @@ export default class AsientosController {
       response.status(200).json({
         message: 'ocurrio un error'
       })
+    }
+  }
+
+  public async AsientosxFuncion({params,response}){
+    try{
+      const asientos = await Asientos.find({funcion:params.id})
+
+      response.status(200).json({message: 'Todo Correcto', data: asientos})
+    }
+    catch(error){
+      response.status(500).json({message: 'Ocurrio un error'})
+    }
+  }
+
+  public async CambiarDisponibilidad({response, request}){
+    try{
+
+      const asiento = request.input('id')
+
+      console.log(asiento)
+
+      const ocupado = await Asientos.updateMany({_id: asiento}, {estado: true})
+
+      response.status(200).json({message: 'Se cambio adecuadamente', data: ocupado})
+    }
+    catch(error){
+      response.status(500).json({message: 'Ocurrio un error'})
     }
   }
 

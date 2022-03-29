@@ -72,5 +72,9 @@ Route.group(()=>{
   Route.resource('asientos', 'AsientosController').apiOnly()
   Route.resource('asiento_cliente', 'AsientoClientesController').apiOnly()
 
+  Route.get('AsientosxFuncion/:id', 'AsientosController.AsientosxFuncion')
+  Route.post('CambiarDisponibilidad', 'AsientosController.CambiarDisponibilidad')
+
 }).prefix('api/v1').middleware(['auth'])
 
+Route.get('prueba', 'FuncionesController.Prueba')
