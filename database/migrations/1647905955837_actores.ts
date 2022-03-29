@@ -8,7 +8,7 @@ export default class Actores extends BaseSchema {
       table.increments('id').primary()
       table.string('nombre', 50).notNullable().unique()
       table.string('alias', 20).notNullable().unique()
-
+      
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
