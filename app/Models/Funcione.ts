@@ -3,6 +3,7 @@ import { BaseModel, BelongsTo, belongsTo, column, Has, HasMany, hasMany } from '
 import Sala from './Sala'
 import Pelicula from './Pelicula'
 import Asiento from './Asiento'
+import AsientoCliente from './AsientoCliente'
 
 export default class Funcione extends BaseModel {
   @column({ isPrimary: true })
@@ -38,5 +39,11 @@ export default class Funcione extends BaseModel {
     localKey: 'id'
   })
   public Asiento: HasMany<typeof Asiento>
+
+  @hasMany(()=> AsientoCliente, {
+    foreignKey: 'funcion',
+    localKey: 'id'
+  })
+  public Funcion: HasMany<typeof AsientoCliente>
 
 }

@@ -40,6 +40,12 @@ export default class AsientoClientesController {
     //}
   }
 
+  //public async VerTickets({response, params}){
+  //  try{
+  //    const consulta = AsientoCliente.query().preload('User').preload('Funcion')
+  //  }
+  //}
+
   /*public async store({response, request}: HttpContextContract) {
     try{
       const asiento_clienteSchema = schema.create({
